@@ -9,22 +9,14 @@ import UIKit
 
 public extension UIAlertAction {
     
-    /// A standard cancel button which performs no action
-    static var cancel: UIAlertAction {
-        return .init(
-            title: "Cancel",
-            style: .cancel,
-            handler: nil
-        )
+    /// A standard cancel button with the option to perform an action on selection
+    static func cancel(with action: (() -> Void)? = nil) -> UIAlertAction {
+        return .init(title: "Cancel", style: .cancel) { _ in action?() }
     }
     
-    /// A standard ok button which performs no action
-    static var ok: UIAlertAction {
-        return .init(
-            title: "Ok",
-            style: .default,
-            handler: nil
-        )
+    /// A standard ok button with the option to perform an action on selection
+    static func ok(with action: (() -> Void)? = nil) -> UIAlertAction {
+        return .init(title: "Ok", style: .default) { _ in action?() }
     }
     
 }
