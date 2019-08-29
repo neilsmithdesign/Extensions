@@ -7,16 +7,22 @@
 
 import UIKit
 
-public func constrain(_ subview: UIView, to superview: UIView, safeArea: Bool = true) {
+public func constrain(_ subview: UIView,
+                      to superview: UIView,
+                      safeArea: Bool = true,
+                      leadingConstant: CGFloat = 0,
+                      trailingConstant: CGFloat = 0,
+                      topConstant: CGFloat = 0,
+                      bottomConstant: CGFloat = 0) {
     superview.addSubview(subview)
     let top = safeArea ? superview.safeAreaLayoutGuide.topAnchor : superview.topAnchor
     let trailing = safeArea ? superview.safeAreaLayoutGuide.trailingAnchor : superview.trailingAnchor
     let bottom = safeArea ? superview.safeAreaLayoutGuide.bottomAnchor : superview.bottomAnchor
     let leading = safeArea ? superview.safeAreaLayoutGuide.leadingAnchor : superview.leadingAnchor
-    subview.topAnchor.constraint(equalTo: top).isActive = true
-    subview.trailingAnchor.constraint(equalTo: trailing).isActive = true
-    subview.bottomAnchor.constraint(equalTo: bottom).isActive = true
-    subview.leadingAnchor.constraint(equalTo: leading).isActive = true
+    subview.topAnchor.constraint(equalTo: top, constant: topConstant).isActive = true
+    subview.trailingAnchor.constraint(equalTo: trailing, constant: -trailingConstant).isActive = true
+    subview.bottomAnchor.constraint(equalTo: bottom, constant: -bottomConstant).isActive = true
+    subview.leadingAnchor.constraint(equalTo: leading, constant: leadingConstant).isActive = true
 }
 
 
