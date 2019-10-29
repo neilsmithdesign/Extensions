@@ -82,3 +82,28 @@ public extension TimeInterval {
     }
 
 }
+
+
+public extension TimeInterval {
+    
+    func asStringComponents() -> [TimeInterval.Component : (String, String)] {
+        let string = self.asString(with: [.days, .hours, .minutes, .seconds], format: .digital)
+        let strings = string.components(separatedBy: ":")
+        
+        func stringComponents(from string: String, for component: TimeInterval.Component) -> (String, String) {
+            return (String(string.first!), String(string.last!))
+        }
+        
+        let days = stringComponents(from: strings[0], for: .days)
+        let hours = stringComponents(from: strings[1], for: .hours)
+        let minutes = stringComponents(from: strings[2], for: .minutes)
+        let seconds = stringComponents(from: strings[3], for: .seconds)
+        return [
+            .days : days,
+            .hours : hours,
+            .minutes : minutes,
+            .seconds : seconds
+        ]
+    }
+    
+}
