@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension UIActivity.ActivityType {
+public extension UIActivity.ActivityType {
     
     var application: Application? {
         guard let app = Application(rawValue: self.rawValue) else { return nil }
@@ -32,7 +32,7 @@ extension UIActivity.ActivityType {
         case googleDrive = "com.google.Drive.ShareExtension"
         case dropbox = "com.getdropbox.Dropbox.DropboxShareExtension"
         
-        var name: String {
+        public var name: String {
             switch self {
             case .iMessage: return "iMessage"
             case .mail: return "Apple Mail"
