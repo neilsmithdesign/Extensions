@@ -35,7 +35,7 @@ public extension UIImage {
         case unableToCreateCGImage
     }
     
-    class `func makeNoir(imageFrom url: URL) throws -> UIImage? {
+    class func makeNoir(imageFrom url: URL) throws -> UIImage? {
         let context = CIContext()
         guard let image = CIImage(contentsOf: url) else { throw NoirImageError.invalidURLSupplied }
         guard let filter = CIFilter(name: "CIPhotoEffectNoir") else { throw NoirImageError.invalidFilterName }
