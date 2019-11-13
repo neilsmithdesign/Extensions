@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreImage
 
 public extension UIImage {
     
@@ -20,6 +21,28 @@ public extension UIImage {
         UIGraphicsEndImageContext()
         return image
         
+    }
+    
+}
+
+
+public extension UIImage {
+    
+    enum NoirImageError: String, Error {
+        case invalidURLSupplied
+        case invalidFilterName
+        case unableToObtainOutputImage
+        case unableToCreateCGImage
+    }
+    
+    class `func makeNoir(imageFrom url: URL) throws -> UIImage? {
+        let context = CIContext()
+        guard let image = CIImage(contentsOf: url) else { throw NoirImageError.invalidURLSupplied }
+        guard let filter = CIFilter(name: "CIPhotoEffectNoir") else { throw NoirImageError.invalidFilterName }
+        filter.setValue(image, forKey: kCIInputImageKey)
+        guard let output = filter.outputImage else { throw NoirImageError.unableToObtainOutputImage }
+        guard let cgImage = context.createCGImage(output, from: output.extent) else { throw NoirImageError.unableToCreateCGImage }
+        return UIImage(cgImage: cgImage)
     }
     
 }
