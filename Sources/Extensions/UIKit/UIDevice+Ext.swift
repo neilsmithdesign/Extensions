@@ -10,9 +10,9 @@ import UIKit
 public extension UIDevice {
     
     var iPhoneSEOrSmaller: Bool {
-        return
-            (isPortrait && UIScreen.main.bounds.height < 600) ||
-                (isLandscape && UIScreen.main.bounds.height < 350)
+        guard UIDevice.current.userInterfaceIdiom == .phone else { return false }
+        let height = UIScreen.main.bounds.height
+        return (isPortrait && height < 600) || (isLandscape && height < 350)
     }
     
     var isPortrait: Bool {
